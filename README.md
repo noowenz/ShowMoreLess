@@ -6,8 +6,8 @@ ShowMoreLess is a A simple Android library for displaying a more and less text i
 
 ## Screenshots
 
-<img src="https://github.com/noowenz/ShowMoreLess/blob/master/art/customdatetimepickerbefore.png" width="300px" />
-<img src="https://github.com/noowenz/ShowMoreLess/blob/master/art/customdatetimepickerbeforetime.png" width="300px" />
+<img src="https://github.com/noowenz/ShowMoreLess/blob/master/art/showmore.png" width="300px" />
+<img src="https://github.com/noowenz/ShowMoreLess/blob/master/art/showless.png" width="300px" />
 
 ## Installation
 
