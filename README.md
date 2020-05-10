@@ -13,7 +13,7 @@ ShowMoreLess is a A simple Android library for displaying a more and less text i
 
 Add Jitpack to your project build.gralde file
       
-      allprojects {
+    allprojects {
 		repositories {
 			...
 			maven { url 'https://jitpack.io' }
@@ -23,8 +23,8 @@ Add Jitpack to your project build.gralde file
 
 Then add this dependency to your app build.gradle file.
 
-      dependencies {
-	        implementation 'https://github.com/noowenz/ShowMoreLess:latest-release'
+    dependencies {
+	    implementation 'https://github.com/noowenz/ShowMoreLess:latest-release'
 	}
 
 ## Usage

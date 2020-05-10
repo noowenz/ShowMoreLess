@@ -59,7 +59,7 @@ class ShowMoreLess private constructor(builder: Builder) {
                 textView.text = text
                 return
             }
-        } else {
+        } else {//TYPE_LINE
             textView.maxLines = textLength
             textView.text = text
         }
@@ -76,22 +76,22 @@ class ShowMoreLess private constructor(builder: Builder) {
                             textView.text = trimText
                             return@Runnable
                         }
-                        isContentExpanded -> {
+                        isContentExpanded -> {//Initial condition is expand
                             addShowLess(textView, trimText)
                             return@Runnable
                         }
-                        else -> {
+                        else -> {//Initial condition is collapse
                             addShowMore(textView, trimText)
                             return@Runnable
                         }
                     }
                 } else {
                     when {
-                        isContentExpanded -> {
+                        isContentExpanded -> {//Initial condition is expand
                             addShowLess(textView, trimText)
                             return@Runnable
                         }
-                        else -> {
+                        else -> {///Initial condition is collapse
                             addShowMore(textView, trimText)
                             return@Runnable
                         }
@@ -151,6 +151,11 @@ class ShowMoreLess private constructor(builder: Builder) {
             }
             ss.setSpan(moreLabelClickableSpan, ss.length - moreLabel.length, ss.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 
+            /**
+             * [textClickableInExpand] will enable text clickable
+             * if [moreLabel] is empty it will allow to click on [textView]
+             * else will make [ClickableSpan]
+             */
             if (textClickableInExpand) {
                 if (moreLabel.isEmpty()) {
                     Handler().post {
@@ -220,6 +225,11 @@ class ShowMoreLess private constructor(builder: Builder) {
             if (lessLabel.isNotEmpty())
                 ss.setSpan(clickableSpan, ss.length - lessLabel.length, ss.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 
+            /**
+             * [textClickableInCollapse] will enable text clickable
+             * if [lessLabel] is empty it will allow to click on [textView]
+             * else will make [ClickableSpan]
+             */
             if (textClickableInCollapse) {
                 if (lessLabel.isEmpty()) {
                     Handler().post {
@@ -293,37 +303,60 @@ class ShowMoreLess private constructor(builder: Builder) {
             return this
         }
 
+        /**
+         * @param moreLabel 's text
+         */
         fun showMoreLabel(moreLabel: String): Builder {
             this.moreLabel = moreLabel
             return this
         }
 
+        /**
+         * @param lessLabel's text
+         */
         fun showLessLabel(lessLabel: String): Builder {
             this.lessLabel = lessLabel
             return this
         }
 
+        /**
+         * @param moreLabelColor's text color
+         *
+         */
         fun showMoreLabelColor(moreLabelColor: Int): Builder {
             this.moreLabelColor = moreLabelColor
             return this
         }
 
+        /**
+         * @param lessLabelColor's text color
+         */
         fun showLessLabelColor(lessLabelColor: Int): Builder {
             this.lessLabelColor = lessLabelColor
             return this
         }
 
+        /**
+         * @param labelUnderLine is boolean for to enable or disable text underline
+         */
         fun labelUnderLine(labelUnderLine: Boolean): Builder {
             this.labelUnderLine = labelUnderLine
             return this
         }
 
+        /**
+         * @param textClickableInCollapse for text collapse condition
+         * @param textClickableInExpand for text expand condition
+         */
         fun textClickable(textClickableInExpand: Boolean, textClickableInCollapse: Boolean): Builder {
             this.textClickableInExpand = textClickableInExpand
             this.textClickableInCollapse = textClickableInCollapse
             return this
         }
 
+        /**
+         * @param expandAnimation is boolean for to control text expand or collapse animation
+         */
         fun expandAnimation(expandAnimation: Boolean): Builder {
             this.expandAnimation = expandAnimation
             return this
