@@ -25,6 +25,7 @@ Then add this dependency to your app build.gradle file.
 
     dependencies {
 	    implementation 'https://github.com/noowenz/ShowMoreLess:latest-release'
+	    //like: implementation 'com.github.noowenz:ShowMoreLess:v1.0'
 	}
 
 ## Usage
