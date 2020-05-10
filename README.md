@@ -13,118 +13,139 @@ ShowMoreLess is a A simple Android library for displaying a more and less text i
 
 Add Jitpack to your project build.gralde file
       
-    allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
-	}
+```Kotlin
+allprojects {
+   repositories {
+      ...
+      maven { url 'https://jitpack.io' }
+   }
 }
+```
 
 Then add this dependency to your app build.gradle file.
 
-    dependencies {
-	    implementation 'https://github.com/noowenz/ShowMoreLess:latest-release'
-	    //like: implementation 'com.github.noowenz:ShowMoreLess:v1.0'
-	}
+```Kotlin
+dependencies {
+   implementation 'https://github.com/noowenz/ShowMoreLess:latest-release'
+   Or
+   implementation 'com.github.noowenz:ShowMoreLess:v1.0'
+}
 
 ## Usage
 
-     ShowMoreLess.Builder(this)
-                /*.textLengthAndLengthType(
-                        length = 100,
-                        textLengthType = ShowMoreLess.TYPE_CHARACTER
-                )*/
-                .textLengthAndLengthType(
-                        length = 5,
-                        textLengthType = ShowMoreLess.TYPE_LINE
-                )
-                .showMoreLabel("show more")
-                .showLessLabel("show less")
-                .showMoreLabelColor(R.color.colorPrimaryDark)
-                .showLessLabelColor(R.color.colorPrimaryDark)
-                .labelUnderLine(labelUnderLine = false)
-                .expandAnimation(expandAnimation = true)
-                .textClickable(
-                        textClickableInExpand = true,
-                        textClickableInCollapse = true
-                )
-                .build().apply {
-                    addShowMoreLess(textView = tv_first, text = tv_first.text, isContentExpanded = true)
-                    setListener(object : ShowMoreLess.OnShowMoreLessClickedListener {
-                        override fun onShowMoreClicked() {
-                            //We can handle or save show more state
-                        }
+```Kotlin
+ShowMoreLess.Builder(this)
+   /*.textLengthAndLengthType(
+     	length = 100,
+        textLengthType = ShowMoreLess.TYPE_CHARACTER
+   )*/
+   .textLengthAndLengthType(
+   	length = 5,
+        textLengthType = ShowMoreLess.TYPE_LINE
+   )
+   .showMoreLabel("show more")
+   .showLessLabel("show less")
+   .showMoreLabelColor(R.color.colorPrimaryDark)
+   .showLessLabelColor(R.color.colorPrimaryDark)
+   .labelUnderLine(labelUnderLine = false)
+   .expandAnimation(expandAnimation = true)
+   .textClickable(
+   	textClickableInExpand = true,
+        textClickableInCollapse = true
+   )
+   .build().apply {
+   	addShowMoreLess(textView = tv_first, text = tv_first.text, isContentExpanded = true)
+        setListener(object : ShowMoreLess.OnShowMoreLessClickedListener {
+	
+             override fun onShowMoreClicked() {
+             	//We can handle or save show more state
+             }
 
-                        override fun onShowLessClicked() {
-                            //We can handle or save show less state
-                        }
-                    })
-                }
-		    
+             override fun onShowLessClicked() {
+             	//We can handle or save show less state
+             }
+   	})
+   }	
+```
 
 # Customization 
 ## You can customize things like bellow
 
-###### 1. Can change *textLengthAndLengthType* as
+##### 1. Can change *textLengthAndLengthType* as
 
-    .textLengthAndLengthType(
-        length = 100,//Length where to add show more text
-        textLengthType = ShowMoreLess.TYPE_CHARACTER //textLengthType is TYPE_CHARACTER
-    )
+```Kotlin
+.textLengthAndLengthType(
+     length = 100,//Length where to add show more text
+     textLengthType = ShowMoreLess.TYPE_CHARACTER //textLengthType is TYPE_CHARACTER
+)
     and
-    .textLengthAndLengthType(
-        length = 5,//Line of text view where to add show more text
-        textLengthType = ShowMoreLess.TYPE_LINE //textLengthType is TYPE_LINE
-    )
+.textLengthAndLengthType(
+     length = 5,//Line of text view where to add show more text
+     textLengthType = ShowMoreLess.TYPE_LINE //textLengthType is TYPE_LINE
+)
+```
 
-###### 2. Can change *show more* and *show less* text label as
+##### 2. Can change *show more* and *show less* text label as
 
-    .showMoreLabel("read more")
-    .showLessLabel("read less")
+```Kotlin
+.showMoreLabel("read more")
+.showLessLabel("read less")
+```
 
-###### 3. Can change text *color* of *Show more* or *Show less*
+##### 3. Can change text *color* of *Show more* or *Show less*
 
-    .showMoreLabelColor(Color.parseColor("#ffffff"))
-    .showLessLabelColor(Color.parseColor("#ffffff"))
+```Kotlin
+.showMoreLabelColor(Color.parseColor("#ffffff"))
+.showLessLabelColor(Color.parseColor("#ffffff"))
+```
 
-###### 4. Can enable *labelUnderLine* easily as
+##### 4. Can enable *labelUnderLine* easily as
 
-    .labelUnderLine(labelUnderLine = false)//true for underline and false for not underline
+```Kotlin
+.labelUnderLine(labelUnderLine = false)//true for underline and false for not underline
+```
 
-###### 5. Can easily handle expand and collapse *animation* by
+##### 5. Can easily handle expand and collapse *animation* by
 
-     .expandAnimation(expandAnimation = true)//expandAnimation will affect both expand and collapse logic
+```Kotlin
+.expandAnimation(expandAnimation = true)//expandAnimation will affect both expand and collapse logic
+```
 
-###### 6. Can handle *textClickable* except clicking more or less txt for expand and collapse
+##### 6. Can handle *textClickable* except clicking more or less txt for expand and collapse
 
-    .textClickable(
-        textClickableInExpand = true,//It will enable text clickable in expand mode
-        textClickableInCollapse = true//It will enable text clickable in collapse mode
-    )
+```Kotlin
+.textClickable(
+     textClickableInExpand = true,//It will enable text clickable in expand mode
+     textClickableInCollapse = true//It will enable text clickable in collapse mode
+)
+```
 
-###### 7. *addShowMoreLess()* function will handle text expand or collapse state
+##### 7. *addShowMoreLess()* function will handle text expand or collapse state
 
-    addShowMoreLess(
-        textView = tv_first, //It is a text view where we have to add read more or less
-        text = tv_first.text, //String in textview
-        isContentExpanded = true//Content expand or collapse history
-    )
+```Kotlin
+addShowMoreLess(
+     textView = tv_first, //It is a text view where we have to add read more or less
+     text = tv_first.text, //String in textview
+     isContentExpanded = true//Content expand or collapse history
+)
+```
 
-###### 8. At last *setListener()* function for callbacks
+##### 8. At last *setListener()* function for callbacks
 
-    setListener(object : ShowMoreLess.OnShowMoreLessClickedListener {
-            override fun onShowMoreClicked() {
-                //We can handle or save show more state
-                //This sate will send in no 7.addShowMoreLess() function of isContentExpanded = false / true
-            }
+```Kotlin
+setListener(object : ShowMoreLess.OnShowMoreLessClickedListener {
+     override fun onShowMoreClicked() {
+     	//We can handle or save show more state
+     	//This sate will send in no 7.addShowMoreLess() function of isContentExpanded = false / true
+     }
 
-            override fun onShowLessClicked() {
-                //We can handle or save show less state
-                //This sate will send in no 7.addShowMoreLess() function of isContentExpanded = false / true
-            }
-        }
-    )
+     override fun onShowLessClicked() {
+     	//We can handle or save show less state
+     	//This sate will send in no 7.addShowMoreLess() function of isContentExpanded = false / true
+     }
+}
+```
+ 
 
 ## License
 
