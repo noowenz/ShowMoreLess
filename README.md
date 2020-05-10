@@ -6,8 +6,8 @@ ShowMoreLess is a A simple Android library for displaying a more and less text i
 
 ## Screenshots
 
-<img src="https://github.com/noowenz/ShowMoreLess/blob/master/art/showmore.png" width="300px" />
-<img src="https://github.com/noowenz/ShowMoreLess/blob/master/art/showless.png" width="300px" />
+<img src="https://github.com/noowenz/ShowMoreLess/blob/master/art/showmore.png" width="250px" />
+<img src="https://github.com/noowenz/ShowMoreLess/blob/master/art/showless.png" width="250px" />
 
 ## Installation
 
@@ -61,11 +61,11 @@ Then add this dependency to your app build.gradle file.
                     })
                 }
 		    
-You can see this in action in the sample app [here](https://github.com/noowenz/CustomDateTimePicker/blob/master/sample/src/main/java/com/noowenz/customdatetimepicker/MainActivity.kt)
 
-## Customization You can customize things like bellow
+# Customization 
+## You can customize things like bellow
 
-1.Can change textLengthAndLengthType as
+###### 1. Can change *textLengthAndLengthType* as
 
     .textLengthAndLengthType(
         length = 100,//Length where to add show more text
@@ -77,32 +77,32 @@ You can see this in action in the sample app [here](https://github.com/noowenz/C
         textLengthType = ShowMoreLess.TYPE_LINE //textLengthType is TYPE_LINE
     )
 
-2.Can change show more and show less text label as
+###### 2. Can change *show more* and *show less* text label as
 
     .showMoreLabel("read more")
     .showLessLabel("read less")
 
-3.Can change text color of Show more or Show less
+###### 3. Can change text *color* of *Show more* or *Show less*
 
     .showMoreLabelColor(Color.parseColor("#ffffff"))
     .showLessLabelColor(Color.parseColor("#ffffff"))
 
-4.Can enable labelUnderLine easily as
+###### 4. Can enable *labelUnderLine* easily as
 
     .labelUnderLine(labelUnderLine = false)//true for underline and false for not underline
 
-5.Can easily handle expand and collapse animation by
+###### 5. Can easily handle expand and collapse *animation* by
 
-        .expandAnimation(expandAnimation = true)//expandAnimation will affect both expand and collapse logic
+     .expandAnimation(expandAnimation = true)//expandAnimation will affect both expand and collapse logic
 
-6.Can handle textClickable except clicking more or less txt for expand and collapse
+###### 6. Can handle *textClickable* except clicking more or less txt for expand and collapse
 
     .textClickable(
         textClickableInExpand = true,//It will enable text clickable in expand mode
         textClickableInCollapse = true//It will enable text clickable in collapse mode
     )
 
-7.addShowMoreLess() function will handle text expand or collapse state
+###### 7. *addShowMoreLess()* function will handle text expand or collapse state
 
     addShowMoreLess(
         textView = tv_first, //It is a text view where we have to add read more or less
@@ -110,7 +110,7 @@ You can see this in action in the sample app [here](https://github.com/noowenz/C
         isContentExpanded = true//Content expand or collapse history
     )
 
-8.At last setListener() function for callbacks
+###### 8. At last *setListener()* function for callbacks
 
     setListener(object : ShowMoreLess.OnShowMoreLessClickedListener {
             override fun onShowMoreClicked() {
