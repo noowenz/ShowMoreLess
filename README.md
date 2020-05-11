@@ -136,6 +136,7 @@ addShowMoreLess(
 
 ```Kotlin
 setListener(object : ShowMoreLess.OnShowMoreLessClickedListener {
+
      override fun onShowMoreClicked() {
      	//We can handle or save show more state
      	//This sate will send in no 7.addShowMoreLess() function of isContentExpanded = false / true
