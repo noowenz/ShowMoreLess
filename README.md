@@ -30,6 +30,7 @@ dependencies {
    Or
    implementation 'com.github.noowenz:ShowMoreLess:v1.0'
 }
+```
 
 ## Usage
 
@@ -64,8 +65,9 @@ ShowMoreLess.Builder(this)
              override fun onShowLessClicked() {
              	//We can handle or save show less state
              }
-   	})
-   }	
+   	}
+   )
+}	
 ```
 
 # Customization 
