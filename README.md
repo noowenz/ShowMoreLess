@@ -2,7 +2,7 @@
 
 # ShowMoreLess
 
-ShowMoreLess is a A simple Android library for displaying a more and less text in TextView 
+ShowMoreLess is a A simple Android library for displaying a more and less functionality in TextView 
 
 ## Screenshots
 
