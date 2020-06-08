@@ -4,10 +4,7 @@ import android.animation.LayoutTransition
 import android.content.Context
 import android.graphics.Color
 import android.os.Handler
-import android.text.SpannableString
-import android.text.SpannableStringBuilder
-import android.text.Spanned
-import android.text.TextPaint
+import android.text.*
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.View
@@ -79,7 +76,7 @@ class ShowMoreLess private constructor(builder: Builder) {
 
         textView.post(Runnable {
             try {
-                val trimText = text.toString().trim()
+                val trimText = trimText(text)
                 textView.text = trimText
                 if (trimText.isEmpty())
                     return@Runnable
@@ -278,6 +275,32 @@ class ShowMoreLess private constructor(builder: Builder) {
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+
+    /**
+     * Support [SpannableStringBuilder] trim without loosing span added on it
+     */
+    private fun trimText(text: CharSequence): CharSequence {
+        var length = text.length
+        val trimmedLength: Int = TextUtils.getTrimmedLength(text)
+        if (length > trimmedLength) {
+            val builder = SpannableStringBuilder(text)
+            // Remove white spaces from the start.
+            var start = 0
+            while (start < length && builder[start] <= ' ') {
+                start++
+            }
+            builder.delete(0, start)
+            length -= start
+            // Remove white spaces from the end.
+            var end = length
+            while (end >= 0 && builder[end - 1] <= ' ') {
+                end--
+            }
+            builder.delete(end, length)
+            return builder
+        }
+        return text
     }
 
     fun setListener(listener: OnShowMoreLessClickedListener) {
