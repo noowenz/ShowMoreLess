@@ -41,6 +41,7 @@ class ShowMoreLess private constructor(builder: Builder) {
     private val moreLabelColor: Int
     private val lessLabelColor: Int
     private val labelUnderLine: Boolean
+    private val labelBold: Boolean
     private val expandAnimation: Boolean
     private val textClickableInExpand: Boolean
     private val textClickableInCollapse: Boolean
@@ -54,15 +55,16 @@ class ShowMoreLess private constructor(builder: Builder) {
         this.moreLabelColor = builder.moreLabelColor
         this.lessLabelColor = builder.lessLabelColor
         this.labelUnderLine = builder.labelUnderLine
+        this.labelBold = builder.labelBold
         this.expandAnimation = builder.expandAnimation
         this.textClickableInExpand = builder.textClickableInExpand
         this.textClickableInCollapse = builder.textClickableInCollapse
     }
 
     fun addShowMoreLess(
-            textView: TextView,
-            text: CharSequence,
-            isContentExpanded: Boolean
+        textView: TextView,
+        text: CharSequence,
+        isContentExpanded: Boolean
     ) {
         if (textLengthType == TYPE_CHARACTER) {
             if (text.length <= textLength) {
@@ -114,16 +116,16 @@ class ShowMoreLess private constructor(builder: Builder) {
     }
 
     private fun addShowMore(
-            textView: TextView,
-            trimText: CharSequence
+        textView: TextView,
+        trimText: CharSequence
     ) {
         try {
             val newSubString: CharSequence
             if (textLengthType == TYPE_LINE) {
                 val lp = textView.layoutParams as ViewGroup.MarginLayoutParams
                 val subString = trimText.substring(
-                        startIndex = textView.layout.getLineStart(0),
-                        endIndex = textView.layout.getLineEnd(textLength - 1)
+                    startIndex = textView.layout.getLineStart(0),
+                    endIndex = textView.layout.getLineEnd(textLength - 1)
                 )
                 newSubString = if (!subString.endsWith("\n", false)) {
                     val startRange = subString.length - (moreLabel.length + 4 + lp.rightMargin / 6)
@@ -140,7 +142,7 @@ class ShowMoreLess private constructor(builder: Builder) {
                 newSubString = trimText.subSequence(0, textLength)
             }
             val spannableStringBuilder = SpannableStringBuilder(
-                    newSubString
+                newSubString
             ).apply {
                 this.append("...")
                 this.append(moreLabel)
@@ -156,6 +158,7 @@ class ShowMoreLess private constructor(builder: Builder) {
                 override fun updateDrawState(ds: TextPaint) {
                     super.updateDrawState(ds)
                     ds.isUnderlineText = labelUnderLine
+                    ds.isFakeBoldText = labelBold
                     ds.color = moreLabelColor
                 }
             }
@@ -205,8 +208,8 @@ class ShowMoreLess private constructor(builder: Builder) {
     }
 
     private fun addShowLess(
-            textView: TextView,
-            trimText: CharSequence
+        textView: TextView,
+        trimText: CharSequence
     ) {
         try {
             textView.maxLines = Integer.MAX_VALUE
@@ -229,6 +232,7 @@ class ShowMoreLess private constructor(builder: Builder) {
                 override fun updateDrawState(ds: TextPaint) {
                     super.updateDrawState(ds)
                     ds.isUnderlineText = labelUnderLine
+                    ds.isFakeBoldText = labelBold
                     ds.color = lessLabelColor
                 }
             }
@@ -313,7 +317,7 @@ class ShowMoreLess private constructor(builder: Builder) {
     }
 
     class Builder(// required
-            val context: Context) {
+        val context: Context) {
         // optional
         var textLength = 100
         var textLengthType = TYPE_CHARACTER
@@ -322,6 +326,7 @@ class ShowMoreLess private constructor(builder: Builder) {
         var moreLabelColor = Color.parseColor("#ffffff")
         var lessLabelColor = Color.parseColor("#ffffff")
         var labelUnderLine = false
+        var labelBold = false
         var expandAnimation = false
         var textClickableInExpand = false
         var textClickableInCollapse = false
@@ -377,6 +382,14 @@ class ShowMoreLess private constructor(builder: Builder) {
          */
         fun labelUnderLine(labelUnderLine: Boolean): Builder {
             this.labelUnderLine = labelUnderLine
+            return this
+        }
+
+        /**
+         * @param labelBold is boolean to enable or disable bold label text
+         */
+        fun labelBold(labelBold: Boolean): Builder {
+            this.labelBold = labelBold
             return this
         }
 
