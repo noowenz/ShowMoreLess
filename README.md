@@ -49,6 +49,7 @@ ShowMoreLess.Builder(this)
    .showMoreLabelColor(R.color.colorPrimaryDark)
    .showLessLabelColor(R.color.colorPrimaryDark)
    .labelUnderLine(labelUnderLine = false)
+   .labelBold(labelBold = false)
    .expandAnimation(expandAnimation = true)
    .textClickable(
    	textClickableInExpand = true,
@@ -57,7 +58,7 @@ ShowMoreLess.Builder(this)
    .build().apply {
    	addShowMoreLess(textView = tv_first, text = tv_first.text, isContentExpanded = true)
         setListener(object : ShowMoreLess.OnShowMoreLessClickedListener {
-	
+
              override fun onShowMoreClicked() {
              	//We can handle or save show more state
              }
@@ -67,10 +68,10 @@ ShowMoreLess.Builder(this)
              }
    	}
    )
-}	
+}
 ```
 
-# Customization 
+# Customization
 ## You can customize things like bellow
 
 ##### 1. Can change *textLengthAndLengthType* as
@@ -107,13 +108,19 @@ ShowMoreLess.Builder(this)
 .labelUnderLine(labelUnderLine = false)//true for underline and false for not underline
 ```
 
-##### 5. Can easily handle expand and collapse *animation* by
+##### 5. Can enable *labelBold* easily as
+
+```Kotlin
+.labelBold(labelBold = false)//true for bold and false for normal
+```
+
+##### 6. Can easily handle expand and collapse *animation* by
 
 ```Kotlin
 .expandAnimation(expandAnimation = true)//expandAnimation will affect both expand and collapse logic
 ```
 
-##### 6. Can handle *textClickable* except clicking more or less txt for expand and collapse
+##### 7. Can handle *textClickable* except clicking more or less txt for expand and collapse
 
 ```Kotlin
 .textClickable(
@@ -122,7 +129,7 @@ ShowMoreLess.Builder(this)
 )
 ```
 
-##### 7. *addShowMoreLess()* function will handle text expand or collapse state
+##### 8. *addShowMoreLess()* function will handle text expand or collapse state
 
 ```Kotlin
 addShowMoreLess(
@@ -132,7 +139,7 @@ addShowMoreLess(
 )
 ```
 
-##### 8. At last *setListener()* function for callbacks
+##### 9. At last *setListener()* function for callbacks
 
 ```Kotlin
 setListener(object : ShowMoreLess.OnShowMoreLessClickedListener {
