@@ -130,10 +130,10 @@ ShowMoreLess.Builder(this)
 )
 ```
 
-##### 8. Can handle *enableLinkify* //It will linkify WEB_URLS | EMAIL_ADDRESSES | PHONE_NUMBERS | MAP_ADDRESSES
+##### 8. Can handle *enableLinkify()* will linkifies WEB_URLS, EMAIL_ADDRESSES, PHONE_NUMBERS and MAP_ADDRESSES
 
 ```Kotlin
-.enableLinkify(linkify = true)//If linkify = true then should disable +textClickable* or point *7* to work
+.enableLinkify(linkify = true)//If linkify = true then should disable point no 7.textClickable to work
 ```
 
 ##### 9. *addShowMoreLess()* function will handle text expand or collapse state
