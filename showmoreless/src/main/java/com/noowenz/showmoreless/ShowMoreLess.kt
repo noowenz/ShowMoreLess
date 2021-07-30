@@ -7,6 +7,7 @@ import android.os.Handler
 import android.text.*
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
+import android.text.util.Linkify
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -30,7 +31,7 @@ import android.widget.TextView
 
 class ShowMoreLess private constructor(builder: Builder) {
     // required
-    private val context: Context
+    private val context: Context = builder.context
     private var onShowMoreLessClickedListener: OnShowMoreLessClickedListener? = null
 
     // optional
@@ -45,9 +46,9 @@ class ShowMoreLess private constructor(builder: Builder) {
     private val expandAnimation: Boolean
     private val textClickableInExpand: Boolean
     private val textClickableInCollapse: Boolean
+    private val enableLinkify: Boolean
 
     init {
-        this.context = builder.context
         this.textLength = builder.textLength
         this.textLengthType = builder.textLengthType
         this.moreLabel = builder.moreLabel
@@ -59,6 +60,7 @@ class ShowMoreLess private constructor(builder: Builder) {
         this.expandAnimation = builder.expandAnimation
         this.textClickableInExpand = builder.textClickableInExpand
         this.textClickableInCollapse = builder.textClickableInCollapse
+        this.enableLinkify = builder.enableLinkify
     }
 
     fun addShowMoreLess(
@@ -162,7 +164,12 @@ class ShowMoreLess private constructor(builder: Builder) {
                     ds.color = moreLabelColor
                 }
             }
-            ss.setSpan(moreLabelClickableSpan, ss.length - moreLabel.length, ss.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            ss.setSpan(
+                moreLabelClickableSpan,
+                ss.length - moreLabel.length,
+                ss.length,
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
 
             /**
              * [textClickableInExpand] will enable text clickable
@@ -191,7 +198,12 @@ class ShowMoreLess private constructor(builder: Builder) {
                             ds.color = textView.currentTextColor
                         }
                     }
-                    ss.setSpan(exceptMoreLabelClickableSpan, 0, ss.length - moreLabel.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                    ss.setSpan(
+                        exceptMoreLabelClickableSpan,
+                        0,
+                        ss.length - moreLabel.length,
+                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
                 }
             }
 
@@ -201,6 +213,8 @@ class ShowMoreLess private constructor(builder: Builder) {
                 (textView.parent as ViewGroup).layoutTransition = layoutTransition
             }
             textView.text = ss
+            if (enableLinkify)
+                Linkify.addLinks(textView, Linkify.ALL)
             textView.movementMethod = LinkMovementMethod.getInstance()
         } catch (e: Exception) {
             e.printStackTrace()
@@ -237,7 +251,12 @@ class ShowMoreLess private constructor(builder: Builder) {
                 }
             }
             if (lessLabel.isNotEmpty())
-                ss.setSpan(clickableSpan, ss.length - lessLabel.length, ss.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                ss.setSpan(
+                    clickableSpan,
+                    ss.length - lessLabel.length,
+                    ss.length,
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
 
             /**
              * [textClickableInCollapse] will enable text clickable
@@ -266,7 +285,12 @@ class ShowMoreLess private constructor(builder: Builder) {
                             ds.color = textView.currentTextColor
                         }
                     }
-                    ss.setSpan(exceptLessLabelClickableSpan, 0, ss.length - lessLabel.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                    ss.setSpan(
+                        exceptLessLabelClickableSpan,
+                        0,
+                        ss.length - lessLabel.length,
+                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
                 }
             }
             if (expandAnimation) {
@@ -275,6 +299,8 @@ class ShowMoreLess private constructor(builder: Builder) {
                 (textView.parent as ViewGroup).layoutTransition = layoutTransition
             }
             textView.text = ss
+            if (enableLinkify)
+                Linkify.addLinks(textView, Linkify.ALL)
             textView.movementMethod = LinkMovementMethod.getInstance()
         } catch (e: Exception) {
             e.printStackTrace()
@@ -317,7 +343,8 @@ class ShowMoreLess private constructor(builder: Builder) {
     }
 
     class Builder(// required
-        val context: Context) {
+        val context: Context
+    ) {
         // optional
         var textLength = 100
         var textLengthType = TYPE_CHARACTER
@@ -330,6 +357,7 @@ class ShowMoreLess private constructor(builder: Builder) {
         var expandAnimation = false
         var textClickableInExpand = false
         var textClickableInCollapse = false
+        var enableLinkify = false
 
         /**
          * @param length can be no. of line OR no. of characters - default is 100 character
@@ -394,10 +422,21 @@ class ShowMoreLess private constructor(builder: Builder) {
         }
 
         /**
+         * @param linkify is boolean to enable or disable linkify on text
+         */
+        fun enableLinkify(linkify: Boolean): Builder {
+            this.enableLinkify = linkify
+            return this
+        }
+
+        /**
          * @param textClickableInCollapse for text collapse condition
          * @param textClickableInExpand for text expand condition
          */
-        fun textClickable(textClickableInExpand: Boolean, textClickableInCollapse: Boolean): Builder {
+        fun textClickable(
+            textClickableInExpand: Boolean,
+            textClickableInCollapse: Boolean
+        ): Builder {
             this.textClickableInExpand = textClickableInExpand
             this.textClickableInCollapse = textClickableInCollapse
             return this

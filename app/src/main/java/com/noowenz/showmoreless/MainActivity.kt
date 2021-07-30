@@ -31,12 +31,17 @@ class MainActivity : AppCompatActivity() {
             .labelUnderLine(labelUnderLine = true)
             .labelBold(labelBold = true)
             .expandAnimation(expandAnimation = true)
+            .enableLinkify(linkify = false)
             .textClickable(
                 textClickableInExpand = true,
                 textClickableInCollapse = true
             )
             .build().apply {
-                addShowMoreLess(textView = tv_first, text = tv_first.text, isContentExpanded = false)
+                addShowMoreLess(
+                    textView = tv_first,
+                    text = tv_first.text,
+                    isContentExpanded = false
+                )
                 setListener(object : ShowMoreLess.OnShowMoreLessClickedListener {
                     override fun onShowMoreClicked() {
                         //We can handle or save show more state

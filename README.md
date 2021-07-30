@@ -51,8 +51,9 @@ ShowMoreLess.Builder(this)
    .labelUnderLine(labelUnderLine = false)
    .labelBold(labelBold = false)
    .expandAnimation(expandAnimation = true)
+   .enableLinkify(linkify = false)
    .textClickable(
-   	textClickableInExpand = true,
+   	    textClickableInExpand = true,
         textClickableInCollapse = true
    )
    .build().apply {
@@ -129,7 +130,13 @@ ShowMoreLess.Builder(this)
 )
 ```
 
-##### 8. *addShowMoreLess()* function will handle text expand or collapse state
+##### 8. Can handle *enableLinkify* //It will linkify WEB_URLS | EMAIL_ADDRESSES | PHONE_NUMBERS | MAP_ADDRESSES
+
+```Kotlin
+.enableLinkify(linkify = true)//If linkify = true then should disable +textClickable* or point *7* to work
+```
+
+##### 9. *addShowMoreLess()* function will handle text expand or collapse state
 
 ```Kotlin
 addShowMoreLess(
@@ -139,7 +146,7 @@ addShowMoreLess(
 )
 ```
 
-##### 9. At last *setListener()* function for callbacks
+##### 10. At last *setListener()* function for callbacks
 
 ```Kotlin
 setListener(object : ShowMoreLess.OnShowMoreLessClickedListener {
