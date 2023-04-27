@@ -229,7 +229,6 @@ class ShowMoreLess private constructor(builder: Builder) {
             textView.maxLines = Integer.MAX_VALUE
             val spannableStringBuilder = SpannableStringBuilder(trimText).apply {
                 if (lessLabel.isNotEmpty()) {
-                    this.append("...")
                     this.append(lessLabel)
                 }
             }
